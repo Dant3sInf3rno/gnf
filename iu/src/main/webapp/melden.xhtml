@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+  <title>Netz Melden - Ghost Net Fishing</title>
+</h:head>
+
+<h:body>
+  <!-- Logo und Adresse -->
+  <div class="header">
+    <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
+    <p id="kopf_rechts">
+      <h:outputText value="#{anschrift.name}"/>
+      <br/>
+      <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
+      <br/>
+      <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
+    </p>
+  </div>
+
+  <!-- Hauptüberschrift -->
+  <h1>Netz Melden</h1>
+
+  <!-- Kurze Einleitung -->
+  <p class="info-text">
+    Bitte füllen Sie die folgenden Informationen aus, um ein Geisternetz zu melden.
+  </p>
+
+  <!-- Formular für Netzmeldung -->
+  <h:form>
+    <div class="meldung-form">
+      <!-- Eingabe für Beschreibung -->
+      <h:outputLabel value="Beschreibung:" for="description"/>
+      <h:inputTextarea id="description" value="#{meldungController.meldung.description}" rows="4" cols="40"
+                       style="margin-bottom: 20px;"/>
+
+      <!-- Eingabe für GPS-Koordinaten -->
+      <h:outputLabel value="GPS-Koordinaten:" for="coordinates"/>
+      <h:inputText id="coordinates" value="#{meldungController.meldung.gpsCoordinates}" required="true" 
+                   requiredMessage="Bitte geben Sie die GPS-Koordinaten ein." size="40" 
+                   style="margin-bottom: 20px;"/>
+
+      <!-- Eingabe für geschätzte Größe -->
+      <h:outputLabel value="Geschätzte Größe (in m²):" for="size"/>
+      <h:inputText id="size" value="#{meldungController.meldung.estimatedSize}" required="true" 
+                   requiredMessage="Bitte geben Sie die geschätzte Größe ein." size="40" 
+                   style="margin-bottom: 20px;"/>
+
+      <!-- Netz-Status (fixiert auf "Gemeldet") -->
+      <h:outputLabel value="Netz-Status:" for="status"/>
+      <h:outputText id="status" value="Gemeldet" style="margin-bottom: 20px; display: block;"/>
+
+      <!-- Meldung absenden -->
+      <h:commandButton value="Meldung absenden" action="#{meldungController.submitMeldung}" styleClass="button"/>
+    </div>
+  </h:form>
+
+  <!-- Fußnote -->
+  <p id="fussnote">Bitte beachten Sie: <br/> Diese Seite ist nur ein Entwurf!</p>
+</h:body>
+</html>
+
+

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+  <title>Ghost Net Fishing</title>
+</h:head>
+
+<h:body>
+  <!-- Logo und Adresse -->
+  <div class="header">
+    <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
+    <p id="kopf_rechts">
+      <h:outputText value="#{anschrift.name}"/>
+      <br/>
+      <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
+      <br/>
+      <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
+    </p>
+  </div>
+
+  <!-- Hauptüberschrift -->
+  <h1>Ghost Net Fishing</h1>
+
+  <!-- Erklärung zu Ghost Net Fishing -->
+  <p class="info-text">
+    Ghost Net Fishing bezeichnet das Phänomen verlorener oder absichtlich im Meer gelassener Fischernetze, die weiterhin 
+    Meeresbewohner fangen und das Ökosystem bedrohen. Diese Netze stellen eine Gefahr für die maritime Umwelt dar, 
+    da sie jahrzehntelang im Wasser treiben und unzählige Tiere töten können.
+  </p>
+
+  <!-- Buttons für Aktionen -->
+  <div class="action-buttons">
+    <h:button value="Netze Melden" outcome="melden.xhtml" styleClass="button"/>
+    <h:button value="Netze Bergen" outcome="bergen.xhtml" styleClass="button"/>
+  </div>
+
+  <!-- Fußnote -->
+  <p id="fussnote">Ein Projekt von: <br/> Konstantin Lepschy</p>
+</h:body>
+</html>
+
+

@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+h1 {
+  color: #005f5f;
+  text-align: center;
+}
+
+.info-text {
+  margin: 20px;
+  font-size: 1.1em;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #005f5f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #004545;
+}
+
+#fussnote {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Login Form Styling for bergen.xhtml */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+.login-form h\:outputLabel {
+  margin-top: 15px;
+}
+
+.login-form h\:inputText {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.login-form .button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Meldung Form Styling for melden.xhtml */
+.meldung-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.meldung-form h\:outputLabel {
+  margin-top: 10px;
+}
+
+.meldung-form h\:inputText, .meldung-form h\:inputTextarea, .meldung-form h\:outputText {
+  width: 100%;
+  padding: 8px;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.meldung-form .button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.meldung-form .button:hover {
+  background-color: #0056b3;
+}
+
