@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    <title>Geisternetze bergen - Ghost Net Fishing</title>
+</h:head>
+
+<h:body>
+  <div class="header">
+    <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
+    <p id="kopf_rechts">
+      <h:outputText value="#{anschrift.name}"/>
+      <br/>
+      <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
+      <br/>
+      <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
+    </p>
+  </div>
+  
+  <!-- Benutzerinformationen anzeigen -->
+  <h:panelGroup rendered="#{loginController.loggedIn}">
+      <h:outputText value="Eingeloggt als: #{loginController.name} - Telefon: #{loginController.phone}"
+                    styleClass="user-info" />
+  </h:panelGroup>
+
+  <!-- Tabelle der gemeldeten Geisternetze -->
+  <h:form>
+      <p:dataTable value="#{geisternetzController.allGeisternetze}" var="netz" styleClass="table">
+          <p:column headerText="ID">
+              <h:outputText value="#{netz.id}" />
+          </p:column>
+          <p:column headerText="Beschreibung">
+              <h:outputText value="#{netz.description}" />
+          </p:column>
+          <p:column headerText="GPS-Koordinaten">
+              <h:outputText value="#{netz.gpsCoordinates}" />
+          </p:column>
+          <p:column headerText="Größe">
+              <h:outputText value="#{netz.estimatedSize}" />
+          </p:column>
+          <p:column headerText="Status">
+              <h:outputText value="#{netz.status}" />
+          </p:column>
+          <p:column headerText="Aktionen">
+              <!-- Löschen Button -->
+              <h:commandButton value="Löschen" action="#{geisternetzController.deleteGeisternetz(netz.id, netz.status)}" class="button" />
+          </p:column>
+      </p:dataTable>
+
+      <!-- Dropdown für ID-Auswahl -->
+      <div class="dropdown-container">
+          <h:outputLabel for="selectedGeisternetzId">Geisternetz ID:</h:outputLabel>
+          <h:selectOneMenu id="selectedGeisternetzId" value="#{geisternetzController.selectedGeisternetzId}">
+              <f:selectItems value="#{geisternetzController.allGeisternetze}" var="netz" itemLabel="#{netz.id}" itemValue="#{netz.id}" />
+          </h:selectOneMenu>
+      </div>
+
+      <!-- Dropdown für Status-Auswahl -->
+      <div class="dropdown-container">
+          <h:outputLabel for="newStatus">Neuer Status:</h:outputLabel>
+          <h:selectOneMenu id="newStatus" value="#{geisternetzController.newStatus}">
+              <f:selectItem itemLabel="Gemeldet" itemValue="Gemeldet" />
+              <f:selectItem itemLabel="Bergung bevorstehend" itemValue="Bergung bevorstehend" />
+              <f:selectItem itemLabel="Geborgen" itemValue="Geborgen" />
+              <f:selectItem itemLabel="Verschollen" itemValue="Verschollen" />
+          </h:selectOneMenu>
+      </div>
+
+      <!-- Speichern Button -->
+      <div class="dropdown-container">
+          <h:commandButton value="Status speichern" action="#{geisternetzController.updateStatus}" class="button" />
+      </div>
+  </h:form>
+
+  <!-- Fußnote -->
+  <p id="fussnote">Dies ist eine Liste aller gemeldeten Geisternetze.</p>
+</h:body>
+</html>

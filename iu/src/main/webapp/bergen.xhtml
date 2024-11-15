@@ -1,53 +1,58 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='UTF-8'?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-  <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
-  <title>Login - Ghost Net Fishing</title>
-</h:head>
+  <h:head>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    <title>Login - Geisternetze Bergen</title>
+  </h:head>
 
-<h:body>
-  <div class="header">
-    <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
-    <p id="kopf_rechts">
-      <h:outputText value="#{anschrift.name}"/>
-      <br/>
-      <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
-      <br/>
-      <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
-    </p>
-  </div>
-
-  <!-- Hauptüberschrift -->
-  <h1>Login - Geisternetze Bergen</h1>
-
-  <!-- Login Formular -->
-  <h:form>
-    <p class="info-text">
-      Bitte geben Sie Ihren Namen und Ihre Handynummer ein, um sich anzumelden und Zugang zur Seite Geisternetze Bergen zu erhalten.
-    </p>
-
-    <div class="login-form">
-      <!-- Name Eingabe -->
-      <h:outputLabel value="Name:" for="name"/>
-      <h:inputText id="name" value="#{loginController.name}" required="true" 
-                   requiredMessage="Bitte geben Sie Ihren Namen ein." size="40"/>
-
-      <!-- Handynummer Eingabe -->
-      <h:outputLabel for="handynummer" value="Handynummer:"/>
-      <h:inputText id="handynummer" value="#{loginController.phone}" required="true" 
-                   requiredMessage="Bitte geben Sie Ihre Handynummer ein." size="40"/>
-
-      <!-- Login Button -->
-      <h:commandButton value="Login" action="#{loginController.login}" styleClass="button"/>
+  <h:body>
+    <div class="header">
+      <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
+      <p id="kopf_rechts">
+        <h:outputText value="#{anschrift.name}"/>
+        <br/>
+        <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
+        <br/>
+        <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
+      </p>
     </div>
-  </h:form>
 
-  <!-- Fußnote -->
-  <p id="fussnote">Bitte beachten Sie: <br/> Diese Seite ist nur ein Entwurf!</p>
-</h:body>
+    <!-- Hauptüberschrift -->
+    <h1>Login - Geisternetze Bergen</h1>
+
+<h:form>
+  <p class="info-text">
+    Bitte geben Sie Ihren Namen und Ihre Handynummer ein, um sich anzumelden und Zugang zur Seite Geisternetze Bergen zu erhalten.
+  </p>
+
+  <div class="login-form">
+    <!-- Name Eingabe -->
+    <h:outputLabel value="Name:" for="name"/>
+    <h:inputText id="name" value="#{loginController.name}" required="true" 
+                 requiredMessage="Bitte geben Sie Ihren Namen ein." size="40"/>
+
+    <!-- Handynummer Eingabe -->
+    <h:outputLabel for="handynummer" value="Handynummer:"/>
+    <h:inputText id="handynummer" value="#{loginController.phone}" required="true" 
+                 requiredMessage="Bitte geben Sie Ihre Handynummer ein." size="40"/>
+
+    <!-- Login Button -->
+    <h:commandButton value="Login" action="#{loginController.login}" styleClass="button">
+      <f:ajax execute="@form" render="@form"/>
+    </h:commandButton>
+  </div>
+</h:form>
+
+
+    <!-- Fußnote -->
+    <p id="fussnote">Bitte beachten Sie: <br/> Diese Seite ist nur ein Entwurf!</p>
+  </h:body>
 </html>
+
+
+
 
 

@@ -53,6 +53,41 @@ h1 {
   color: #888;
 }
 
+/* Styling für Dropdown-Menüs */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Zentriert die Dropdowns */
+  justify-content: center;
+  margin: 20px auto;
+  width: 300px;
+}
+
+.dropdown-container select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  margin-bottom: 15px; /* Abstand zwischen den Dropdowns */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.dropdown-container button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.1em;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-container button:hover {
+  background-color: #0056b3;
+}
+
 /* Login Form Styling for bergen.xhtml */
 .login-form {
   display: flex;
@@ -112,4 +147,5 @@ h1 {
 .meldung-form .button:hover {
   background-color: #0056b3;
 }
+
 

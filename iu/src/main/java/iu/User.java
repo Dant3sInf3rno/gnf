@@ -1,20 +1,12 @@
 package iu;
 
-import java.io.Serializable;
+public class User {
 
-public class User implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int id;
+    private int id;  // Hinzugefügt: id für den Benutzer
     private String name;
     private String handynummer;
 
-
-    public User() {}
-
- 
+    // Getter und Setter für id, name und handynummer
     public int getId() {
         return id;
     }
@@ -39,3 +31,4 @@ public class User implements Serializable {
         this.handynummer = handynummer;
     }
 }
+

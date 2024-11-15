@@ -3,13 +3,14 @@ package iu;
 import java.io.Serializable;
 
 public class Geisternetz implements Serializable {
-    private int id;
-    private String description;
-    private String gpsCoordinates;
-    private String estimatedSize;
-    private String status = "Gemeldet";  // Standardwert auf "Gemeldet" setzen
 
-    // Getter und Setter
+    private int id;  // Einzigartige ID für jedes Geisternetz
+    private String description;  // Beschreibung des Geisternetzes
+    private String gpsCoordinates;  // GPS-Koordinaten
+    private String estimatedSize;  // Geschätzte Größe
+    private String status = "Gemeldet";  // Status, standardmäßig "Gemeldet"
+
+    // Getter und Setter für jedes Attribut
     public int getId() {
         return id;
     }
