@@ -1,66 +1,61 @@
 package iu;
 
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Named;
-import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+import jakarta.inject.Inject;
+import java.io.Serializable;
 
-@SessionScoped
-@Named("loginController")
-public class LoginController {
+@Named
+@RequestScoped
+public class LoginController implements Serializable {
 
-    private String name;
-    private String phone;
-    private boolean loggedIn = false; // Diese Variable speichert den Login-Status
+    private User user = new User(); // Repräsentiert die Login-Daten eines Benutzers
 
-    // Getter und Setter für name und phone
-    public String getName() {
-        return name;
+    @Inject
+    private UserDAO userDAO; // Datenzugriffsobjekt zur Datenbankinteraktion
+
+    // Getter und Setter für User (Login-Daten)
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getPhone() {
-        return phone;
-    }
+    /**
+     * Methode zur Verarbeitung des Login-Submits.
+     */
+    public String submitLogin() {
+        try {
+            // Benutzer speichern (immer erlaubt, da Registrierung nicht erforderlich ist)
+            boolean success = userDAO.saveUser(user);
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    // Getter für loggedIn, damit JSF darauf zugreifen kann
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    // Setter für loggedIn
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
-    // Login-Methoden
-    public String login() {
-        UserDAO userDAO = new UserDAO();
-        if (userDAO.validateUser(name, phone)) {
-            loggedIn = true;
-            return "netzebergenmain.xhtml?faces-redirect=true";  // Redirect zur Zielseite
-        } else {
-            loggedIn = false;
-            return null;  // Bleibe auf der aktuellen Seite bei fehlerhaftem Login
+            FacesContext context = FacesContext.getCurrentInstance();
+            if (success) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login erfolgreich!", null));
+                return "netzebergenmain.xhtml?faces-redirect=true"; // Weiterleitung nach erfolgreichem Login
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Fehler beim Login. Bitte versuchen Sie es erneut.", null));
+                return null;
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ein Fehler ist aufgetreten: " + e.getMessage(), null));
+            e.printStackTrace();
+            return null;
         }
     }
-
-
-
-    // Logout Methode, um den Benutzer abzumelden
-    public String logout() {
-        loggedIn = false;
-        return "logout";  // Navigiere zur Logout-Seite oder zur Login-Seite
+    
+    public void logout() {
+        user = null; // Benutzer aus der Sitzung entfernen
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession(); // Sitzung invalidieren
     }
 }
+
+
 
 
 

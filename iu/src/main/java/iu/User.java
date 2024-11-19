@@ -1,12 +1,14 @@
 package iu;
 
-public class User {
+import java.io.Serializable;
 
-    private int id;  // Hinzugefügt: id für den Benutzer
-    private String name;
-    private String handynummer;
+public class User implements Serializable {
 
-    // Getter und Setter für id, name und handynummer
+    private int id; // Einzigartige ID für jeden Benutzer
+    private String name; // Name des Benutzers
+    private String phoneNumber; // Handynummer des Benutzers
+
+    // Getter und Setter für jedes Attribut
     public int getId() {
         return id;
     }
@@ -23,12 +25,14 @@ public class User {
         this.name = name;
     }
 
-    public String getHandynummer() {
-        return handynummer;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setHandynummer(String handynummer) {
-        this.handynummer = handynummer;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
+
+
 

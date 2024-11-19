@@ -21,5 +21,7 @@
         <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
         <location>/viewExpired.xhtml</location> <!-- Fehlerseite, die bei abgelaufener View angezeigt wird -->
     </error-page>
+    
+    
 
 </web-app>
