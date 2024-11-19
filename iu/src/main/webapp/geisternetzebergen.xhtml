@@ -26,6 +26,21 @@
                     styleClass="user-info" />
   </h:panelGroup>
 
+<h:outputText value="Willkommen, #{netzeBergenMainController.user.name}!" />
+<h:outputText value="Telefonnummer: #{netzeBergenMainController.user.phoneNumber}" />
+
+<!-- Beispiel für eine Bearbeitung -->
+<h:form>
+    <h:outputLabel value="Neue Telefonnummer:" />
+    <h:inputText value="#{netzeBergenMainController.user.phoneNumber}" />
+    <h:commandButton value="Speichern" action="#{netzeBergenMainController.updateUserPhoneNumber(netzeBergenMainController.user.phoneNumber)}" />
+</h:form>
+
+<!-- Logout -->
+<h:form>
+    <h:commandButton value="Logout" action="#{netzeBergenMainController.logout}" />
+</h:form>
+
 <h:form>
     <p:dataTable value="#{geisternetzController.allGeisternetze}" var="netz" styleClass="table">
         <p:column headerText="ID">

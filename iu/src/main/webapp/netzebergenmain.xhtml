@@ -35,6 +35,54 @@
         <h3>Sie sind nicht eingeloggt. Bitte loggen Sie sich ein.</h3>
         <h:commandButton value="Login" action="bergen.xhtml" />
     </h:panelGroup>
+    
+        <p:dataTable value="#{geisternetzController.allGeisternetze}" var="netz" styleClass="table">
+        <p:column headerText="ID">
+            <h:outputText value="#{netz.id}" />
+        </p:column>
+        <p:column headerText="Beschreibung">
+            <h:outputText value="#{netz.description}" />
+        </p:column>
+        <p:column headerText="GPS-Koordinaten">
+            <h:outputText value="#{netz.gpsCoordinates}" />
+        </p:column>
+        <p:column headerText="Größe">
+            <h:outputText value="#{netz.estimatedSize}" />
+        </p:column>
+        <p:column headerText="Status">
+            <h:outputText value="#{netz.status}" />
+        </p:column>
+        <p:column headerText="Aktionen">
+            <!-- Löschen Button -->
+            <h:commandButton value="Löschen" action="#{geisternetzController.deleteGeisternetz(netz.id, netz.status)}" class="button" />
+        </p:column>
+    </p:dataTable>
+    
+        <!-- Dropdown für ID-Auswahl -->
+    <div class="dropdown-container">
+        <h:outputLabel for="selectedGeisternetzId">Geisternetz ID:</h:outputLabel>
+        <h:selectOneMenu id="selectedGeisternetzId" value="#{geisternetzController.selectedGeisternetzId}">
+            <f:selectItems value="#{geisternetzController.allGeisternetze}" var="netz" itemLabel="#{netz.id}" itemValue="#{netz.id}" />
+        </h:selectOneMenu>
+    </div>
+
+    <!-- Dropdown für Status-Auswahl -->
+    <div class="dropdown-container">
+        <h:outputLabel for="newStatus">Neuer Status:</h:outputLabel>
+        <h:selectOneMenu id="newStatus" value="#{geisternetzController.newStatus}">
+            <f:selectItem itemLabel="Gemeldet" itemValue="Gemeldet" />
+            <f:selectItem itemLabel="Verschollen" itemValue="Verschollen" />
+        </h:selectOneMenu>
+    </div>
+
+    <!-- Speichern Button -->
+    <div class="dropdown-container">
+        <h:commandButton value="Status speichern" action="#{geisternetzController.updateStatus}" class="button" />
+    </div>
+    
+   <div class="action-buttons">
+    <h:button value="Zurück zum Start" outcome="index.xhtml" styleClass="button"/>
+  </div>
 
     <!-- Logout Button -->
     <h:form>
