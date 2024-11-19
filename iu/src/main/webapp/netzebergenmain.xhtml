@@ -1,42 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
 <h:head>
-    <title>Benutzerdaten - Geisternetze bergen</title>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    <title>Geisternetze bearbeiten - Ghost Net Fishing</title>
 </h:head>
 
 <h:body>
-    <!-- Header mit Logo und Adresse -->
-    <div class="header">
-        <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
-        <p id="kopf_rechts">
-            <h:outputText value="#{anschrift.name}"/>
-            <br/>
-            <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
-            <br/>
-            <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
-        </p>
-    </div>
+  <div class="header">
+    <p><img id="kopf_links" src="logo.png" width="250" alt="Logo"/></p>
+    <p id="kopf_rechts">
+      <h:outputText value="#{anschrift.name}"/>
+      <br/>
+      <h:outputText value="#{anschrift.strasse} #{anschrift.hausnummer}"/>
+      <br/>
+      <h:outputText value="#{anschrift.plz} #{anschrift.ort}"/>
+    </p>
+  </div>
 
-    <!-- Benutzerinformationen anzeigen (nur wenn eingeloggt) -->
-    <h:panelGroup rendered="#{loginController.user != null}">
-        <h2>Willkommen, #{loginController.user.name}!</h2>
-        <h:outputText value="Name: #{loginController.user.name}" />
-        <br/>
-        <h:outputText value="Telefon: #{loginController.user.phoneNumber}" />
-    </h:panelGroup>
-
-    <!-- Falls der Benutzer nicht eingeloggt ist -->
-    <h:panelGroup rendered="#{loginController.user == null}">
-        <h3>Sie sind nicht eingeloggt. Bitte loggen Sie sich ein.</h3>
-        <h:commandButton value="Login" action="bergen.xhtml" />
-    </h:panelGroup>
-    
-        <p:dataTable value="#{geisternetzController.allGeisternetze}" var="netz" styleClass="table">
+<h:form>
+    <p:dataTable value="#{geisternetzMainController.allGeisternetze}" var="netz" styleClass="table">
         <p:column headerText="ID">
             <h:outputText value="#{netz.id}" />
         </p:column>
@@ -54,44 +39,46 @@
         </p:column>
         <p:column headerText="Aktionen">
             <!-- Löschen Button -->
-            <h:commandButton value="Löschen" action="#{geisternetzController.deleteGeisternetz(netz.id, netz.status)}" class="button" />
+            <h:commandButton value="Löschen" action="#{geisternetzMainController.deleteGeisternetz(netz.id, netz.status)}" class="button" />
         </p:column>
     </p:dataTable>
-    
-        <!-- Dropdown für ID-Auswahl -->
+
+    <!-- Dropdown für ID-Auswahl -->
     <div class="dropdown-container">
         <h:outputLabel for="selectedGeisternetzId">Geisternetz ID:</h:outputLabel>
-        <h:selectOneMenu id="selectedGeisternetzId" value="#{geisternetzController.selectedGeisternetzId}">
-            <f:selectItems value="#{geisternetzController.allGeisternetze}" var="netz" itemLabel="#{netz.id}" itemValue="#{netz.id}" />
+        <h:selectOneMenu id="selectedGeisternetzId" value="#{geisternetzMainController.selectedGeisternetzId}">
+            <f:selectItems value="#{geisternetzMainController.allGeisternetze}" var="netz" itemLabel="#{netz.id}" itemValue="#{netz.id}" />
         </h:selectOneMenu>
     </div>
 
     <!-- Dropdown für Status-Auswahl -->
     <div class="dropdown-container">
         <h:outputLabel for="newStatus">Neuer Status:</h:outputLabel>
-        <h:selectOneMenu id="newStatus" value="#{geisternetzController.newStatus}">
+        <h:selectOneMenu id="newStatus" value="#{geisternetzMainController.newStatus}">
             <f:selectItem itemLabel="Gemeldet" itemValue="Gemeldet" />
             <f:selectItem itemLabel="Verschollen" itemValue="Verschollen" />
+            <f:selectItem itemLabel="Geborgen" itemValue="Geborgen" />
+            <f:selectItem itemLabel="Bergung bevorstehend" itemValue="Bergung bevorstehend" />
         </h:selectOneMenu>
     </div>
 
     <!-- Speichern Button -->
     <div class="dropdown-container">
-        <h:commandButton value="Status speichern" action="#{geisternetzController.updateStatus}" class="button" />
+        <h:commandButton value="Status speichern" action="#{geisternetzMainController.updateStatus}" class="button" />
     </div>
     
    <div class="action-buttons">
     <h:button value="Zurück zum Start" outcome="index.xhtml" styleClass="button"/>
   </div>
+  
+</h:form>
 
-    <!-- Logout Button -->
-    <h:form>
-        <h:commandButton value="Logout" action="#{loginController.logout}" />
-    </h:form>
 
-    <!-- Fußnote -->
-    <p id="fussnote">Dies ist eine Beispielseite zur Anzeige von Benutzerdaten nach dem Login.</p>
+  <!-- Fußnote -->
+  <p id="fussnote">Bearbeiten oder löschen Sie die gemeldeten Geisternetze.</p>
 </h:body>
 </html>
+
+
 
 
