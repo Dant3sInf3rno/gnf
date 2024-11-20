@@ -20,6 +20,14 @@
     </p>
   </div>
 
+    <!-- Benutzerinformationen anzeigen -->
+    <h2>Willkommen!</h2>
+    <p>
+        <h:outputText value="Name: #{loginController.user.name}" />
+        <br />
+        <h:outputText value="Telefonnummer: #{loginController.user.phoneNumber}" />
+    </p>
+
 <h:form>
     <p:dataTable value="#{geisternetzMainController.allGeisternetze}" var="netz" styleClass="table">
         <p:column headerText="ID">

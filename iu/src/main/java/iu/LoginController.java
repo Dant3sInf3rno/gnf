@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class LoginController implements Serializable {
+public class LoginController {
 
     private User user = new User(); // Repräsentiert die Login-Daten eines Benutzers
 
