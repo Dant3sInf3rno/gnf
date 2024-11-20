@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class UserDAO {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -40,6 +43,32 @@ public class UserDAO {
         return false; // Fehler
     }
 
+    // Methode zum Abrufen eines Benutzers basierend auf Name und Telefonnummer
+    public User findUser(String name, String phoneNumber) {
+        User user = null;
+        String sql = "SELECT id, name, handynummer FROM benutzer WHERE name = ? AND handynummer = ?";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, name);
+            statement.setString(2, phoneNumber);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new User();
+                    user.setId(resultSet.getInt("id"));
+                    user.setName(resultSet.getString("name"));
+                    user.setPhoneNumber(resultSet.getString("handynummer"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user; // Rückgabe des gefundenen Benutzers oder null
+    }
+
     // Methode zum Abrufen aller Benutzer
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -64,14 +93,14 @@ public class UserDAO {
         return users; // Rückgabe der Liste der Benutzer
     }
 
-    // Methode zum Abrufen eines Benutzers nach ID
-    public User getUserById(int id) {
+ // Methode zum Abrufen eines Benutzers nach Name
+    public User getUserByName(String name) {
         User user = null;
-        String sql = "SELECT id, name, handynummer FROM benutzer WHERE id = ?";
+        String sql = "SELECT id, name, handynummer FROM benutzer WHERE name = ?";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, id);
+            statement.setString(1, name);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -86,37 +115,6 @@ public class UserDAO {
         }
 
         return user; // Rückgabe des gefundenen Benutzers oder null
-    }
-
-    // Methode zum Löschen eines Benutzers nach ID
-    public boolean deleteUserById(int id) {
-        String sql = "DELETE FROM benutzer WHERE id = ?";
-
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, id);
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0; // Gibt true zurück, wenn ein Datensatz gelöscht wurde
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false; // Gibt false zurück, falls ein Fehler aufgetreten ist
-    }
-
-    // Methode zum Aktualisieren der Handynummer eines Benutzers
-    public boolean updateUserPhoneNumber(int id, String newPhoneNumber) {
-        String sql = "UPDATE benutzer SET handynummer = ? WHERE id = ?";
-
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, newPhoneNumber);
-            statement.setInt(2, id);
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0; // Gibt true zurück, wenn die Handynummer erfolgreich aktualisiert wurde
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false; // Gibt false zurück, falls ein Fehler aufgetreten ist
     }
 }
 
